@@ -72,44 +72,46 @@ class Simulator():
         total_graph_weights = np.ones(self.n_products)
         for p in range(self.n_products):
             for i in range(self.n_products):
-                if user_c.graph_proba[p][i] != 0:
-                    total_graph_weights[p] *= user_c.graph_proba[p][i]
+                if user_c.graph_proba[p][i] != 0:           #not on the diagonal (=0)
+                    total_graph_weights[p] *= user_c.graph_proba[p][i]      #multiply the rows of the graph proba as we move from product to product
                 prod_reward[p] += cf.margin[p] * user_c.conversion_rates[p] * user_c.user_num[p + 1] * total_graph_weights[p] * user_c.get_sold_items()
-
+                                #margin * conv rate * number of users for this product * graph weights until now * the number of sold items per class
         for n in range(self.n_products):
             for m in range(self.n_prices):
                 total_rewards [n] += prod_reward[n][m]
+
+                #get total rewards per product
 
         return total_rewards
 
 
     def Greedy_alg(self, users):
-        price_index = [0, 0, 0, 0, 0]
+        price_index = [0, 0, 0, 0, 0]       #initial price config
         prev = 0
         price_hist = []
         reward_hist = []
-        max_reward = np.sum(self.rewards_per_class(users))
-        bool_max_prices = np.zeros(5)
+        max_reward = np.sum(self.rewards_per_class(users))          #total reward from all products
+        bool_max_prices = np.zeros(5)                               #chosen price config
         it = 0
 
-        while max_reward  > prev and np.sum(bool_max_prices) < 5:
+        while max_reward > prev and np.sum(bool_max_prices) < 5:
             if it > 0:
-                price_index[np.argmax(sum_rewards)] += 1
-            reward_hist.append(max_reward)
-            price_hist.append(deepcopy(price_index))
+                price_index[np.argmax(sum_rewards)] += 1        #to choose which config gets the max price
+            reward_hist.append(max_reward)                      #total rewards until now
+            price_hist.append(deepcopy(price_index))            #price config update
 
             prev = max_reward
             sum_rewards = np.zeros(5)
 
             for i in range(self.n_products):
                 if price_index[i] < 3:
-                    price_index[i]+=1
-                    sum_rewards[i] = np.sum(self.rewards_per_class(users))
-                    price_index[i] -=1
+                    price_index[i]+=1           #we check next price config
+                    sum_rewards[i] = np.sum(self.rewards_per_class(users))          #we get rewards of it
+                    price_index[i] -=1              #then return to initial
                 else:
-                    bool_max_prices[i] = True
-            max_reward = np.max(sum_rewards)
-            if max_reward > prev:
+                    bool_max_prices[i] = True           #then we are done with this product
+            max_reward = np.max(sum_rewards)            #get the max
+            if max_reward > prev:                       # we move to next iteration
                 it+=1
 
         return price_hist, reward_hist, it
