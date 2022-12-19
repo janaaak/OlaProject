@@ -1,5 +1,11 @@
 import numpy as np
 
+# products:
+# 1) wine€
+# 2) wine€€€
+# 3) limoncello
+# 4) gin
+# 5) whisky
 
 #Students
 conversion_rates_S = np.array([[0.95, 0.85, 0.78, 0.62],
