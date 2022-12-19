@@ -39,8 +39,9 @@ prices = np.array([[ 4. ,  6. ,  9. ,  13.],
 costs = np.array([3.5, 40, 6, 22, 27])
 costs = np.array([[3.5], [40], [6], [22], [27]])
 
-prices*=1.05
-costs*=1.2
+prices*=1.2   #due to the first change
+prices*=1.05  #due to the second change
+costs*=1.1    #due to the second change
 
 margin = prices - costs
 
