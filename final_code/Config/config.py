@@ -7,13 +7,6 @@ import numpy as np
 # 4) gin
 # 5) whisky
 
-
-#percentage of class users out of the total number of users (known from previous year)
-user_dist = np.array([0.3, 0.5, 0.2])
-#mean of daily user (known from previous year)
-mean_daily_user = 400
-
-
 #Students
 conversion_rates_S = np.array([[0.95, 0.85, 0.78, 0.62],
                                [0.39, 0.25, 0.13, 0.02],
