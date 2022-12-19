@@ -1,16 +1,6 @@
 import numpy as np
 
 
-
-# DEFINIRE CONVERSION RATES PER OGNI CLASSE DI UTENTI
-
-#CATEGORIA PRODOROTTI: ARTICOLI PER LA CASA
-#Prodotti associati a categorie:
-#PERSPNE <30 --> POUF
-#MASCHI >30 --> CANTINETTA PER IL VINI
-#FEMMINE >30 --> PIANTA GRASSA
-#QUADRO MEDIUM/HIGH PRICE PIACE A TUTTE LE CATEGORIE MA MENO DEI PREFERITI
-
 #Students
 conversion_rates_S = np.array([[0.95, 0.85, 0.78, 0.62],
                                [0.39, 0.25, 0.13, 0.02],
