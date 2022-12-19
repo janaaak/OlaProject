@@ -45,7 +45,7 @@ prices = np.array([[ 4. ,  6. ,  9. ,  13.],
                    [29. , 36. , 50. , 57. ],
                    [33. , 38. , 45. , 49. ]])
 
-
+prices*=1.2
 #wine€, wine€€€, limoncello, gin, whisky
 costs = np.array([3.5, 40, 6, 22, 27])
 costs = np.array([[3.5], [40], [6], [22], [27]])

@@ -39,6 +39,9 @@ prices = np.array([[ 4. ,  6. ,  9. ,  13.],
 costs = np.array([3.5, 40, 6, 22, 27])
 costs = np.array([[3.5], [40], [6], [22], [27]])
 
+prices*=1.05
+costs*=1.2
+
 margin = prices - costs
 
 alphas_S = np.array([0.06, 0.29, 0.06, 0.21, 0.27, 0.11])
